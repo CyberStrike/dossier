@@ -33,7 +33,7 @@ export default new VueRouter({
               component: Person,
                    path: '/person/:id',
                    props: (route) => ({
-                           id: Number(route.params.id) || 0
+                           id: String(route.params.id) || ''
                          }),
             }
           ]
