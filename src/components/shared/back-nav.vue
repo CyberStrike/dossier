@@ -6,7 +6,7 @@
       </v-btn>
     </v-slide-x-transition>
     <v-slide-x-transition>
-      <v-toolbar-title>Dossiers</v-toolbar-title>
+      <v-toolbar-title>Dossier</v-toolbar-title>
     </v-slide-x-transition>
     <v-spacer></v-spacer>
   </v-toolbar>

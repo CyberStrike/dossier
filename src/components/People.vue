@@ -2,7 +2,7 @@
   <v-slide-x-transition>
     <v-container fluid>
       <v-layout row>
-        <v-flex xs12 sm6 offset-sm3>
+        <v-flex  v-show="!noResults" xs12 sm6 offset-sm3>
           <v-card>
             <v-list>
               <v-list-tile avatar v-for="(person, index) in paginatedSearch" :key="index"
@@ -27,6 +27,21 @@
               <v-pagination v-show="hidePagination" :length="pageCount" :value="page" @input="current_page"></v-pagination>
             </v-slide-x-transition>
           </div>
+        </v-flex>
+        <v-flex v-show="noResults" xs12 sm6 offset-sm3 align-center>
+          <v-layout row text-xs-center
+            style="display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              width: 100%;
+              height: 80vh;">
+
+            <v-icon class="indigo--text" x-large style="font-size: 8rem">
+              sentiment_very_dissatisfied
+            </v-icon>
+            <h3>No one here.</h3>
+          </v-layout>
         </v-flex>
       </v-layout>
     </v-container>
@@ -68,6 +83,9 @@ export default {
                    },
                    hidePagination () {
                      return !(this.searchPeople.length <= this.per_page)
+                   },
+                   noResults () {
+                     return this.searchPeople.length === 0
                    },
                    ...mapGetters({people: 'people', getCurrentPage: 'currentPage'})
                  },
