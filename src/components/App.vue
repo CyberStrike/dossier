@@ -34,7 +34,11 @@ export default {
                       ...mapActions(['setCurrentPage'])
                     },
           updated: function () {
-                      this.setCurrentPage(this.$route.name)
+                      // Check if current page has changed
+                      // to prevent unecessary updates
+                      if (this.$route.name !== this.currentPage) {
+                        this.setCurrentPage(this.$route.name)
+                      }
                     }
 }
 </script>

@@ -5,7 +5,7 @@
         <v-flex xs12 sm6 offset-sm3>
           <v-card>
             <v-list>
-              <v-list-tile avatar v-for="(person, index) in paginatedSearch"
+              <v-list-tile avatar v-for="(person, index) in paginatedSearch" :key="index"
                 @click="$router.push({name: 'person', params: {id: person.login.md5}})">
                 <v-list-tile-avatar>
                   <img v-bind:src="person.picture.thumbnail"/>

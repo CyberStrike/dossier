@@ -26,13 +26,7 @@ export default {
      methods: mapActions(['setCurrentPage']),
      mounted: function () {
                 this.show = true;
-              },
-     beforeRouteEnter (to, from, next) {
-       next( (vm) => {
-         vm.setCurrentPage(vm.$route.name)
-         return true
-       })
-     }
+              }
 }
 </script>
 

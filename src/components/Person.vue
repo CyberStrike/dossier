@@ -85,7 +85,6 @@
             </v-list>
           </v-card>
         </v-flex>
-
       </v-layout>
     </v-container>
   </v-slide-x-transition>
@@ -114,7 +113,8 @@ export default {
                                this.$http.get(url)
                                 .then( res => res.data.name )
                                 .then( name => that.nationality = name)
-                             }
+                             },
+             ...mapActions(['setCurrentPage'])
             },
   computed: {
                 person: function () {
@@ -136,7 +136,14 @@ export default {
              '$route' (to, from) {
                this.getNationality()
              }
-            }
+            },
+   beforeRouteEnter (to, from, next) {
+     next( (vm) => {
+       if (vm.$route.name !== vm.currentPage) {
+          vm.setCurrentPage(vm.$route.name)
+       }
+     })
+   }
 }
 </script>
 
