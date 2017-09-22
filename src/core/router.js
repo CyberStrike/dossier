@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import People from '../components/People.vue'
 import Person from '../components/Person.vue'
 import Search from '../components/Search.vue'
+import Test from '../components/Test.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ export default new VueRouter({
                    props: (route) => ({
                            id: String(route.params.id) || ''
                          }),
+            },
+            {
+                   name: 'test',
+              component: Test,
+                   path: '/test'
             }
           ]
 })
