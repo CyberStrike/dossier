@@ -19,8 +19,6 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
-
   export default {
         name: 'searchNav',
        props: {
@@ -40,7 +38,6 @@
                     return this.query
                   },
                   set (value) {
-                    //this.$store.dispatch('setSearch', value)
                     if (value.length === 0) return this.$router.replace({q: {} })
                     this.$router.replace({query: {q: value}})
                   }
@@ -50,9 +47,6 @@
                 clearSearch () {
                   this.$router.replace({query: {} })
                 }
-              },
-       watch: {
-
               },
      mounted: function () {
                 this.show = true
