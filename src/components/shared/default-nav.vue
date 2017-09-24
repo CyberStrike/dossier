@@ -12,10 +12,5 @@
 </template>
 
 <script>
-  export default {
-    name: 'defaultNav'
-  }
+  export default { name: 'defaultNav' }
 </script>
-
-<style lang="scss">
-</style>

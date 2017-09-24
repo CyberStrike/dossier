@@ -1,3 +1,50 @@
+<script>
+import { mapGetters, mapActions } from 'vuex'
+import { toTitleCase } from '../core/utilities'
+
+export default {
+      name: 'person',
+     props: {
+              id: String
+            },
+      data: function () {
+              return {
+                nationality: 'Unknown',
+                show: false
+              }
+            },
+   filters: { toTitleCase },
+   methods: {
+             getNationality: function () {
+                               let that = this
+                               let url = `https://restcountries.eu/rest/v2/alpha/${this.person.nat}`
+
+                               this.$http.get(url)
+                                   .then( res => res.data.name )
+                                   .then( name => that.nationality = name)
+                             }
+            },
+  computed: {
+                person: function () {
+                          return this.people.filter(person => person.login.md5.indexOf(this.id) >= 0)[0]
+                        },
+              fullName: function () {
+                          return `${toTitleCase(this.person.name.title)}.  ${toTitleCase(this.person.name.first)} ${toTitleCase(this.person.name.last)}`
+                        },
+              ...mapGetters({people: 'people'})
+            },
+   mounted: function () {
+              this.getNationality()
+              this.show = true
+            },
+     watch: {
+             '$route' (to, from) {
+               this.getNationality()
+             }
+            }
+}
+</script>
+
 <template>
   <v-slide-x-transition>
     <v-container v-show="show">
@@ -89,63 +136,3 @@
     </v-container>
   </v-slide-x-transition>
 </template>
-
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { toTitleCase } from '../core/utilities'
-
-export default {
-      name: 'person',
-     props: {
-              id: String
-            },
-      data: function () {
-              return {
-                nationality: 'us',
-                show: false
-              }
-            },
-   filters: { toTitleCase },
-   methods: {
-             getNationality: function () {
-                               let that = this
-                               let url = `https://restcountries.eu/rest/v2/alpha/${this.person.nat}`
-                               this.$http.get(url)
-                                .then( res => res.data.name )
-                                .then( name => that.nationality = name)
-                             },
-             ...mapActions(['setCurrentPage'])
-            },
-  computed: {
-                person: function () {
-                          return this.people.filter(person => person.login.md5.indexOf(this.id) >= 0)[0]
-                        },
-              fullName: function () {
-                          return `${toTitleCase(this.person.name.title)}.  ${toTitleCase(this.person.name.first)} ${toTitleCase(this.person.name.last)}`
-                        },
-              ...mapGetters({people: 'people'})
-            },
-   mounted: function () {
-              this.getNationality()
-              this.show = true
-            },
-    update: function () {
-              this.getNationality()
-            },
-     watch: {
-             '$route' (to, from) {
-               this.getNationality()
-             }
-            },
-   beforeRouteEnter (to, from, next) {
-     next( (vm) => {
-       if (vm.$route.name !== vm.currentPage) {
-          vm.setCurrentPage(vm.$route.name)
-       }
-     })
-   }
-}
-</script>
-
-<style lang="scss">
-</style>
