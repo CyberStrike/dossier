@@ -67,8 +67,8 @@ export default {
 <template>
   <v-slide-x-transition>
     <v-container fluid>
-      <v-layout row>
-        <v-flex  v-show="!noResults" xs12 sm6 offset-sm3>
+      <v-layout row align-center justify-center>
+        <v-flex  v-show="!noResults" flex xs12 sm8 md5>
           <v-card>
             <v-list>
               <v-list-tile avatar v-for="(person, index) in paginatedSearch" :key="index"
@@ -94,16 +94,9 @@ export default {
             </v-slide-x-transition>
           </div>
         </v-flex>
-        <v-flex v-show="noResults" xs12 sm6 offset-sm3 align-center>
-          <v-layout row text-xs-center
-            style="display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              width: 100%;
-              height: 80vh;">
-
-            <v-icon class="indigo--text" x-large style="font-size: 8rem">
+        <v-flex v-show="noResults" xs12 sm6>
+          <v-layout column text-xs-center empty-state-container align-center justify-center>
+            <v-icon class="indigo--text xx-large" >
               sentiment_very_dissatisfied
             </v-icon>
             <h3>No one here.</h3>
@@ -113,3 +106,11 @@ export default {
     </v-container>
   </v-slide-x-transition>
 </template>
+
+<style lang="sass" media="screen">
+  .empty-state-container
+    width: 100%
+    height: 80vh
+  .icon.xx-large
+    font-size: 8rem
+</style>

@@ -47,7 +47,7 @@ export default {
 
 <template>
   <v-slide-x-transition>
-    <v-container v-show="show">
+    <v-container fluid v-show="show">
       <v-layout row>
         <v-flex xs12 text-xs-center>
           <v-avatar class="mb-3" size=100>
@@ -60,11 +60,12 @@ export default {
           <h2 class="text-xs-center">{{fullName}}</h2>
         </v-flex>
       </v-layout>
-      <v-layout>
-        <v-flex xs12 sm6 offset-sm3>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md6 lg5>
           <v-card>
             <v-list two-line>
 
+              <!-- Nationality -->
               <v-list-tile>
                 <v-list-tile-action>
                   <v-icon class="indigo--text">language</v-icon>
@@ -75,6 +76,7 @@ export default {
                 </v-list-tile-content>
               </v-list-tile>
 
+              <!-- Gender -->
               <v-list-tile>
                 <v-list-tile-action>
                   <v-icon class="indigo--text">accessibility</v-icon>
@@ -87,6 +89,7 @@ export default {
 
               <v-subheader inset>Contact</v-subheader>
 
+              <!-- Smartphone -->
               <v-list-tile>
                 <v-list-tile-action>
                   <v-icon class="indigo--text">smartphone</v-icon>
@@ -97,6 +100,7 @@ export default {
                 </v-list-tile-content>
               </v-list-tile>
 
+              <!-- Home -->
               <v-list-tile>
                 <v-list-tile-action>
                   <v-icon class="indigo--text">home</v-icon>
@@ -107,6 +111,7 @@ export default {
                 </v-list-tile-content>
               </v-list-tile>
 
+              <!-- E-Mail -->
               <v-list-tile>
                 <v-list-tile-action>
                   <v-icon class="indigo--text">mail</v-icon>
@@ -120,15 +125,21 @@ export default {
 
               <v-subheader inset>Addresses</v-subheader>
 
+              <!-- Address -->
               <v-list-tile>
                 <v-list-tile-action>
                   <v-icon class="indigo--text">location_on</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>1400 Main Street</v-list-tile-title>
-                  <v-list-tile-sub-title>Orlando, FL 79938</v-list-tile-sub-title>
+                  <v-list-tile-title>{{person.location.street | toTitleCase}},</v-list-tile-title>
+                  <v-list-tile-sub-title>
+                    {{person.location.city | toTitleCase}},
+                    {{person.location.state | toTitleCase}}
+                    {{person.location.postcode}}
+                  </v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
+
             </v-list>
           </v-card>
         </v-flex>
