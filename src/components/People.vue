@@ -66,7 +66,7 @@ export default {
 
 <template>
   <v-slide-x-transition>
-    <v-container fluid>
+    <v-container app fluid>
       <v-layout row align-center justify-center>
         <v-flex  v-show="!noResults" flex xs12 sm8 md5>
           <v-card>

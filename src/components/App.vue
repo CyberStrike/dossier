@@ -26,3 +26,9 @@ export default {
      <v-footer></v-footer>
    </v-app>
 </template>
+
+<style media="screen">
+  main {
+    margin-top: 45px;
+  }
+</style>
