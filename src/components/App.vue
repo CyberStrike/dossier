@@ -21,7 +21,9 @@ export default {
   <v-app>
     <component :is="currentNav" :query="$route.query.q"></component>
      <main>
-       <router-view></router-view>
+       <v-container app fluid>
+         <router-view></router-view>
+       </v-container>
      </main>
      <v-footer></v-footer>
    </v-app>
