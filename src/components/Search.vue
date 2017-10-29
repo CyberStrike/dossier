@@ -1,10 +1,4 @@
-<template>
-  <people :per_page="per_page" :page="page" :query="q"></people>
-</template>
-
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 import people from './People.vue'
 
 export default {
@@ -23,19 +17,12 @@ export default {
                        show: false
                      }
                    },
-          methods: mapActions(['setCurrentPage']),
           mounted: function () {
                      this.show = true;
-                   },
- beforeRouteEnter: function (to, from, next) {
-                     next( (vm) => {
-                       if (vm.$route.name !== vm.currentPage) {
-                          vm.setCurrentPage(vm.$route.name)
-                       }
-                     })
                    }
 }
 </script>
 
-<style lang="scss">
-</style>
+<template>
+  <people :per_page="per_page" :page="page" :query="q"></people>
+</template>

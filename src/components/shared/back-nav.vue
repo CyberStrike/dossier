@@ -14,12 +14,8 @@
 
 <script>
   export default {
-    name: 'backNav',
-    data: function () {
-            return {
-              show: false
-            }
-          },
+       name: 'backNav',
+       data: () => ({ show: false }),
     mounted: function () {
       this.show = true
     }

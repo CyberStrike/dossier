@@ -6,9 +6,9 @@
       </v-btn>
     </v-slide-x-transition>
     <v-slide-x-transition>
-      <input v-model="search"
+      <input class="search-box" autofocus v-model="search"
              name="search" label="Search" placeholder="Search"
-             style="width: 100%; font-size: 2rem; outline: none;"/>
+             />
     </v-slide-x-transition>
     <v-slide-x-transition>
       <v-btn v-show="show" @click="clearSearch" icon>
@@ -19,8 +19,6 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
-
   export default {
         name: 'searchNav',
        props: {
@@ -29,19 +27,15 @@
                          default: ''
                        }
               },
-        data: function () {
-                return {
-                  show: false
-                }
-               },
+        data: () => ({ show: false }),
     computed: {
                 search: {
                   get () {
                     return this.query
                   },
                   set (value) {
-                    //this.$store.dispatch('setSearch', value)
-                    if (value.length === 0) return this.$router.replace({q: {} })
+                    let emptyInput = value.length === 0
+                    if ( emptyInput ) return this.$router.replace({q: {} })
                     this.$router.replace({query: {q: value}})
                   }
                 }
@@ -51,14 +45,13 @@
                   this.$router.replace({query: {} })
                 }
               },
-       watch: {
-
-              },
-     mounted: function () {
-                this.show = true
-              }
+     mounted: function () { this.show = !this.show }
   }
 </script>
 
-<style lang="scss">
+<style lang="sass" media="screen">
+  .search-box
+    width: 100%
+    font-size: 2rem
+    outline: none
 </style>

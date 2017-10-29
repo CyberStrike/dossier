@@ -1,14 +1,25 @@
+<script>
+
+import defaultNav from './shared/default-nav.vue'
+import searchNav from './shared/search-nav.vue'
+import backNav from './shared/back-nav.vue'
+
+export default {
+        name: 'app',
+  components: { defaultNav, searchNav, backNav },
+    computed: {
+                currentNav: function () {
+                  if (this.$route.name == "search") return 'searchNav'
+                  if (this.$route.name == "home") return 'defaultNav'
+                  return 'backNav'
+                }
+              }
+}
+</script>
+
 <template>
   <v-app>
-    <template v-if="isPage('search')">
-      <searchNav :query="$route.query.q"></searchNav>
-    </template>
-    <template v-else-if="isPage('home')">
-      <defaultNav> </defaultNav>
-    </template>
-    <template v-else>
-      <backNav></backNav>
-    </template>
+    <component :is="currentNav" :query="$route.query.q"></component>
      <main>
        <router-view></router-view>
      </main>
@@ -16,32 +27,8 @@
    </v-app>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
-
-import defaultNav from './shared/default-nav.vue'
-import searchNav from './shared/search-nav.vue'
-import backNav from './shared/back-nav.vue'
-
-export default {
-              name: 'app',
-        components: { defaultNav, searchNav, backNav },
-          computed: mapGetters({currentPage: 'currentPage'}),
-           methods: {
-                      isPage: function (name) {
-                        return this.currentPage === name
-                      },
-                      ...mapActions(['setCurrentPage'])
-                    },
-          updated: function () {
-                      // Check if current page has changed
-                      // to prevent unecessary updates
-                      if (this.$route.name !== this.currentPage) {
-                        this.setCurrentPage(this.$route.name)
-                      }
-                    }
-}
-</script>
-
-<style lang="scss">
+<style media="screen">
+  main {
+    margin-top: 45px;
+  }
 </style>
